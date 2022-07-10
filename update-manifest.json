@@ -1,22 +1,22 @@
 {
 	"additions": [
 		{
-			"name": "data/mods/testmenu",
+			"name": "data/testmenu",
 			"type": "folder",
 			"path": "data/mods/testmenu"
 		},
 		{
-			"name": "data/mods/testmenu/mp",
+			"name": "data/testmenu/mp",
 			"type": "folder",
 			"path": "data/mods/testmenu/mp"
 		},
 		{
-			"name": "data/mods/testmenu/mp/_ambientpackage.gsc",
+			"name": "data/testmenu/mp/_ambientpackage.gsc",
 			"type": "file",
 			"path": "data/mods/testmenu/mp/_ambientpackage.gsc"
 		},
 		{
-			"name": "data/mods/testmenu/mp/_development_dvars.gsc",
+			"name": "data/testmenu/mp/_development_dvars.gsc",
 			"type": "file",
 			"path": "data/mods/testmenu/mp/_development_dvars.gsc"
 		}
