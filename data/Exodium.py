@@ -4,11 +4,13 @@ import os
 import shutil
 import time
 import wmi
+import requests
+import json
 
 wf = wmi.WMI()
 
 version = "V1.0"
-currentVersionNumber = 2
+currentVersionNumber = 3
 
 def clear():
 	if os.name == "nt":
@@ -18,8 +20,8 @@ def clear():
 	else:
 		pass
 
-def check_update():
-	versionFile = requests.get("https://github.com/AstrenOX/Exodium/releases/latest/download/updater-version.txt")
+def update_exists():
+	versionFile = requests.get("https://raw.githubusercontent.com/AstrenOX/Exodium/main/updater-version.txt")
 	updatedVersion = int(versionFile.text)
 
 	if updatedVersion > currentVersionNumber:
@@ -28,7 +30,27 @@ def check_update():
 		return False
 
 def self_update():
-	updateManifestFile = requests.get("https://github.com/AstrenOX/Exodium/releases/latest/download/update-manifest.json")
+	updateManifestFile = requests.get("https://raw.githubusercontent.com/AstrenOX/Exodium/main/update-manifest.json")
+	updateManifest = json.loads(updateManifestFile.text)
+
+	for deletion in updateManifest["deletions"]:
+		if deletion["type"] == "folder":
+			os.rmdir("../" + deletion["path"])
+		elif deletion["type"] == "file":
+			os.unlink("../" + deletion["path"])
+
+	for addition in updateManifest["additions"]:
+		if addition["type"] == "folder":
+			os.makedir("../" + deletion["path"])
+		elif addition["type"] == "file":
+			with open("../" + deletion["path"], "w") as file:
+				fileRequest = requests.get("https://raw.githubusercontent.com/AstrenOX/Exodium/main/" + addition["name"])
+				file.write(fileRequest.text)
+
+	for edition in updateManifest["editions"]:
+		with open("../" + edition["path"], "w") as file:
+			fileRequest = requests.get("https://raw.githubusercontent.com/AstrenOX/Exodium/main/" + edition["name"])
+			file.write(fileRequest.text)
 
 def game_is_running():
 	for process in wf.Win32_Process():
@@ -271,6 +293,12 @@ def main_menu():
 	else:
 		pass
 	main_menu()
+
+if update_exists():
+	print("Une mise à jour est en cours, veuillez patienter, nous allons relancer le programme pour vous une fois la mise à jour terminée. ")
+	self_update()
+	os.execl(os.sys.executable, os.path.abspath(__file__), *os.sys.argv)
+	os.sys.exit()
 
 if os.name == "nt":
 	os.system("mode con LINES=50 COLS=145")
