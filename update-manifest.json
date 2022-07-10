@@ -1,6 +1,10 @@
 {
 	"additions": [
 		{
+			"type": "folder",
+			"path": "data/mods"
+		},
+		{
 			"name": "data/testmenu",
 			"type": "folder",
 			"path": "data/mods/testmenu"
