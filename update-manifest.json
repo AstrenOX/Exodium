@@ -2,6 +2,10 @@
 	"additions": [
 		{
 			"type": "folder",
+			"path": "data"
+		},
+		{
+			"type": "folder",
 			"path": "data/mods"
 		},
 		{
