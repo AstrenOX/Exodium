@@ -1,9 +1,37 @@
 {
 	"additions": [
-
+		{
+			"name": "data/testmenu",
+			"type": "folder",
+			"path": "data/testmenu"
+		},
+		{
+			"name": "data/testmenu/mp",
+			"type": "folder",
+			"path": "data/testmenu/mp"
+		},
+		{
+			"name": "data/testmenu/mp/_ambientpackage.gsc",
+			"type": "file",
+			"path": "data/testmenu/mp/_ambientpackage.gsc"
+		},
+		{
+			"name": "data/testmenu/mp/_development_dvars.gsc",
+			"type": "file",
+			"path": "data/testmenu/mp/_development_dvars.gsc"
+		}
 	],
 	"editions": [
-
+		{
+			"name": "data/Exodium.py",
+			"type": "file",
+			"path": "data/Exodium.py"
+		},
+		{
+			"name": "Exodium.exe",
+			"type": "file",
+			"path": "Exodium.exe"
+		}
 	],
 	"deletions": [
 
