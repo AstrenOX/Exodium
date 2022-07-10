@@ -35,22 +35,40 @@ def self_update():
 
 	for deletion in updateManifest["deletions"]:
 		if deletion["type"] == "folder":
-			os.rmdir("../" + deletion["path"])
+			try:
+				os.rmdir("../" + deletion["path"])
+			except:
+				pass
 		elif deletion["type"] == "file":
-			os.unlink("../" + deletion["path"])
+			try:
+				os.unlink("../" + deletion["path"])
+			except:
+				pass
 
 	for addition in updateManifest["additions"]:
 		if addition["type"] == "folder":
-			os.makedir("../" + deletion["path"])
+			try:
+				os.makedirs("../" + addition["path"])
+			except:
+				print("Failed to create folder ", addition["path"])
 		elif addition["type"] == "file":
-			with open("../" + deletion["path"], "w") as file:
+			try:
 				fileRequest = requests.get("https://raw.githubusercontent.com/AstrenOX/Exodium/main/" + addition["name"])
-				file.write(fileRequest.text)
+				with open("../" + addition["path"], "wb") as file:
+					file.write(fileRequest.content)
+					file.close()
+			except:
+				print("Failed to download/write file ", addition["path"])
+
 
 	for edition in updateManifest["editions"]:
-		with open("../" + edition["path"], "w") as file:
+		try:
 			fileRequest = requests.get("https://raw.githubusercontent.com/AstrenOX/Exodium/main/" + edition["name"])
-			file.write(fileRequest.text)
+			with open("../" + edition["path"], "wb") as file:
+				file.write(fileRequest.content)
+				file.close()
+		except:
+			print("Failed to update file ", edition["path"])
 
 def game_is_running():
 	for process in wf.Win32_Process():
