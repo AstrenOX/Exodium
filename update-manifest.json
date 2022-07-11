@@ -18,17 +18,15 @@
 	],
 	"editions": [
 		{
-			"name": "data/Exodium.py",
-			"type": "file",
-			"path": "data/Exodium.py"
-		},
-		{
 			"name": "Exodium.exe",
 			"type": "file",
 			"path": "Exodium.exe"
 		}
 	],
 	"deletions": [
-
+		{
+			"type": "file",
+			"path": "data/Exodium.py"
+		}
 	]
 }
